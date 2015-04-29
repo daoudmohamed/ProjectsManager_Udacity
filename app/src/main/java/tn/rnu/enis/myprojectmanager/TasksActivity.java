@@ -23,8 +23,7 @@ public class TasksActivity extends AppCompatActivity {
         ID = getIntent().getStringExtra(Contract.REF);
         name = getIntent().getStringExtra(Contract.NAME);
 
-        getSupportActionBar().setTitle(name+" Tasks");
-
+        getSupportActionBar().setTitle(name);
         if(savedInstanceState==null) getSupportFragmentManager().beginTransaction().add(R.id.task_list,new TasksFragment().setProject_id(ID)).commit();
 
     }

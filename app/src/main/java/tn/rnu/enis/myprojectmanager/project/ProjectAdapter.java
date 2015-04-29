@@ -33,23 +33,19 @@ public class ProjectAdapter extends CursorAdapter {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         String name = cursor.getString(ProjectsFragment.COL_PROJECT_NAME);
-        String description = cursor.getString(ProjectsFragment.COL_PROJECT_DESCRIPTION);
         String date = cursor.getString(ProjectsFragment.COL_PROJECT_DATE);
 
         viewHolder.nameView.setText(name);
-        viewHolder.descriptionView.setText(description);
         viewHolder.dateView.setText(date);
 
     }
 
     public static class ViewHolder {
         public final TextView nameView;
-        public final TextView descriptionView;
         public final TextView dateView;
 
         public ViewHolder(View view) {
             dateView = (TextView) view.findViewById(R.id.date);
-            descriptionView = (TextView) view.findViewById(R.id.description);
             nameView = (TextView) view.findViewById(R.id.name);
         }
     }

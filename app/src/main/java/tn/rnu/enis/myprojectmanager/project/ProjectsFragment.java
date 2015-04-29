@@ -96,4 +96,6 @@ public class ProjectsFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoaderReset(Loader<Cursor> loader) {
         mProjectAdapter.swapCursor(null);
     }
+
+
 }

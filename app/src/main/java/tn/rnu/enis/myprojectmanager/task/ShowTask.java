@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -29,10 +30,12 @@ public class ShowTask extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showtask);
+        title = (TextView) findViewById(R.id.title);
+        description = (TextView) findViewById(R.id.description);
+        date = (TextView) findViewById(R.id.date);
+        status = (TextView) findViewById(R.id.status);
 
         id = getIntent().getStringExtra(Contract.REF);
-
-
 
         FloatingActionButton flot = (FloatingActionButton) findViewById(R.id.fab);
         flot.setOnClickListener(new View.OnClickListener() {
@@ -49,10 +52,6 @@ public class ShowTask extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        title = (TextView) findViewById(R.id.title);
-        description = (TextView) findViewById(R.id.description);
-        date = (TextView) findViewById(R.id.date);
-        status = (TextView) findViewById(R.id.status);
 
         Cursor c = getContentResolver().query(Contract.Task.buildTASKUri(Long.parseLong(id)),TasksFragment.TASK_COLUMNS,null,null,null);
 

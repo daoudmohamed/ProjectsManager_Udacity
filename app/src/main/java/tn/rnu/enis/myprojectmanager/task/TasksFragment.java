@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -71,8 +72,11 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
                 Intent i = new Intent(getActivity(),ShowTask.class);
-                i.putExtra(Contract.REF,project_id);
+
+                i.putExtra(Contract.REF,cursor.getString(0));
+
 
                 startActivity(i);
 
@@ -131,7 +135,7 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
         int id = item.getItemId();
 
         if (id == R.id.action_Delete) {
-            getActivity().getContentResolver().delete(Contract.Task.CONTENT_URI,Contract.Task._ID+"= ?",new String[]{project_id});
+            getActivity().getContentResolver().delete(Contract.Project.CONTENT_URI,Contract.Task._ID+"= ?",new String[]{project_id});
             getActivity().finish();
             return true;
         }
