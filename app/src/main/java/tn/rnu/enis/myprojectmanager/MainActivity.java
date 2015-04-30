@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             getSupportFragmentManager().beginTransaction().add(R.id.project_list,new ProjectsFragment()).commit();
         }
 
+        getSupportActionBar().setElevation(0.5f);
+
     }
 
 
