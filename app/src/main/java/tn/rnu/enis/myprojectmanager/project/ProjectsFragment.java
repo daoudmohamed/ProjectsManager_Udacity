@@ -29,6 +29,7 @@ public class ProjectsFragment extends Fragment implements LoaderManager.LoaderCa
     private ProjectAdapter mProjectAdapter ;
     private ListView mListView ;
 
+
     private static final int PROJECT_LOADER = 0;
 
     private static final String[] PROJECT_COLUMNS = {
@@ -55,10 +56,14 @@ public class ProjectsFragment extends Fragment implements LoaderManager.LoaderCa
         mListView = (ListView) rootView.findViewById(R.id.list_view);
         mListView.setAdapter(mProjectAdapter);
 
+        mListView.setEmptyView(rootView.findViewById(R.id.notfound));
+
         mListView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
 
         return rootView;
     }
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,9 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
+
+import java.security.interfaces.DSAKey;
 
 import tn.rnu.enis.myprojectmanager.project.AddProject;
 import tn.rnu.enis.myprojectmanager.R;
@@ -29,10 +33,11 @@ import tn.rnu.enis.myprojectmanager.data.Contract;
  */
 public class TasksFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private TaskAdapter mTaskAdapter ;
-    private ListView mListView ;
+    private TaskAdapter mTaskAdapter;
+    private ListView mListView;
 
-    private static String project_id ;
+    private static String project_id;
+    private static String status;
 
     private static final int TASKS_LOADER = 0;
 
@@ -50,11 +55,6 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
     public static final int COL_TASK_DATE = 3;
     public static final int COL_TASK_STATUS = 4;
 
-    public TasksFragment setProject_id(String project_id) {
-        TasksFragment.project_id = project_id;
-        return this ;
-    }
-
 
     @Nullable
     @Override
@@ -62,20 +62,30 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
 
         mTaskAdapter = new TaskAdapter(getActivity(), null, 0);
 
+        project_id = getArguments().getString(Contract.REF);
+        status = getArguments().getString(Contract.NAME);
+
         View rootView = inflater.inflate(R.layout.tasksfragment, container, false);
 
         setHasOptionsMenu(true);
 
         mListView = (ListView) rootView.findViewById(R.id.list_view);
+
+        TextView v = (TextView) rootView.findViewById(R.id.notfound);
+
+        v.setText(getString(R.string.no_task, status));
+
+        mListView.setEmptyView(v);
+
         mListView.setAdapter(mTaskAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
-                Intent i = new Intent(getActivity(),ShowTask.class);
+                Intent i = new Intent(getActivity(), ShowTask.class);
 
-                i.putExtra(Contract.REF,cursor.getString(0));
+                i.putExtra(Contract.REF, cursor.getString(0));
 
 
                 startActivity(i);
@@ -94,8 +104,8 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
         flot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(),AddTask.class);
-                i.putExtra(Contract.REF,project_id);
+                Intent i = new Intent(getActivity(), AddTask.class);
+                i.putExtra(Contract.REF, project_id);
                 startActivity(i);
             }
         });
@@ -105,12 +115,16 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String sortOrder = Contract.Project._ID + " DESC";
+        String[] argm;
+        if (status == null)
+            argm = new String[]{project_id};
+        else argm = new String[]{project_id, status};
 
         return new CursorLoader(getActivity(),
                 Contract.Task.CONTENT_URI,
                 TASK_COLUMNS,
-                Contract.Task.TASK_PROJECT+"= ?",
-                new String[]{project_id},
+                Contract.Task.TASK_PROJECT + "= ?" + ((status != null) ? (" AND " + Contract.Task.TASK_STATUS + "= ?") : ("")),
+                argm,
                 sortOrder);
     }
 
@@ -125,7 +139,7 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inf) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inf) {
         inf.inflate(R.menu.delmenu, menu);
         super.onCreateOptionsMenu(menu, inf);
     }
@@ -135,7 +149,7 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
         int id = item.getItemId();
 
         if (id == R.id.action_Delete) {
-            getActivity().getContentResolver().delete(Contract.Project.CONTENT_URI,Contract.Task._ID+"= ?",new String[]{project_id});
+            getActivity().getContentResolver().delete(Contract.Project.CONTENT_URI, Contract.Task._ID + "= ?", new String[]{project_id});
             getActivity().finish();
             return true;
         }

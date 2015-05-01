@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import tn.rnu.enis.myprojectmanager.data.Contract;
+import tn.rnu.enis.myprojectmanager.pagers.TaskHolder;
 import tn.rnu.enis.myprojectmanager.task.TasksFragment;
 
 /**
@@ -23,8 +24,13 @@ public class TasksActivity extends AppCompatActivity {
         ID = getIntent().getStringExtra(Contract.REF);
         name = getIntent().getStringExtra(Contract.NAME);
 
+        Bundle bundle = new Bundle();
+        bundle.putString(Contract.REF, ID );
+        TaskHolder fragInfo = new TaskHolder();
+        fragInfo.setArguments(bundle);
+
         getSupportActionBar().setTitle(name);
-        if(savedInstanceState==null) getSupportFragmentManager().beginTransaction().add(R.id.task_list,new TasksFragment().setProject_id(ID)).commit();
+        if(savedInstanceState==null) getSupportFragmentManager().beginTransaction().replace(R.id.task_list,fragInfo).commit();
 
     }
 }

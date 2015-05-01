@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.material.widget.ActionSheet;
 
 import tn.rnu.enis.myprojectmanager.data.Contract;
+import tn.rnu.enis.myprojectmanager.pagers.TaskHolder;
 import tn.rnu.enis.myprojectmanager.project.ProjectsFragment;
 import tn.rnu.enis.myprojectmanager.task.DefaultTasksFragment;
 import tn.rnu.enis.myprojectmanager.task.TasksFragment;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         } else {
             mTwoPane = false;
-            getSupportFragmentManager().beginTransaction().add(R.id.project_list,new ProjectsFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.project_list, new ProjectsFragment()).commit();
         }
 
         getSupportActionBar().setElevation(0.5f);
@@ -55,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         if (id == R.id.action_Delete_all_Project) {
-            getContentResolver().delete(Contract.Project.CONTENT_URI,null,null);
-            Toast.makeText(this,getString(R.string.all_projects_deleted),Toast.LENGTH_SHORT).show();
+            getContentResolver().delete(Contract.Project.CONTENT_URI, null, null);
+            Toast.makeText(this, getString(R.string.all_projects_deleted), Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -66,20 +67,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
-                String id = cursor.getString(ProjectsFragment.COL_PROJECT_ID);
-                if(mTwoPane){
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.weather_detail_container, new TasksFragment().setProject_id(id))
-                            .commit();
-                }else{
+        Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+        String id = cursor.getString(ProjectsFragment.COL_PROJECT_ID);
 
-                    Intent i = new Intent(getApplicationContext(), TasksActivity.class);
-                    i.putExtra(Contract.REF,id);
-                    i.putExtra(Contract.NAME,cursor.getString(ProjectsFragment.COL_PROJECT_NAME));
+        if (mTwoPane) {
+            Bundle bundle = new Bundle();
+            bundle.putString(Contract.REF, id);
+            TasksFragment tasks = new TasksFragment();
+            tasks.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.weather_detail_container,tasks , "detail")
+                    .commit();
+        } else {
 
-                    startActivity(i);
-                }
+            Intent i = new Intent(getApplicationContext(), TasksActivity.class);
+            i.putExtra(Contract.REF, id);
+            i.putExtra(Contract.NAME, cursor.getString(ProjectsFragment.COL_PROJECT_NAME));
 
-            }
+            startActivity(i);
+        }
+
+    }
 }
