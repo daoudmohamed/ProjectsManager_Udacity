@@ -18,6 +18,6 @@ the user can control his project advancement by changing task's status.
 
 # Attached documents :
 
-* The Signed APK (signed-release.apk)
+* The Signed APK (app-release.apk)
 * self-evaluation document (Android+Fundamentals+Project+Self-Evaluation.docx)
 * ScreenShots Folder (ScreenShots)
