@@ -34,6 +34,7 @@ public class UpdateTask extends AppCompatActivity {
 
         id = getIntent().getStringExtra(Contract.REF);
 
+        getSupportActionBar().setTitle(getString(R.string.edit_task));
 
         task_name = (FloatingEditText) findViewById(R.id.task_name);
         task_detail = (FloatingEditText) findViewById(R.id.task_detail);

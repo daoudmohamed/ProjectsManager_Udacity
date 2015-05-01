@@ -16,6 +16,7 @@
     <string name="all_projects_deleted">all projects are deleted</string>
     <string name="no_task">No %1$s Task Found</string>
     <string name="no_project">No Project Found</string>
+    <string name="edit_task">Edit Task</string>
     <string-array name="status">
         <item>waiting</item>
         <item>doing</item>
