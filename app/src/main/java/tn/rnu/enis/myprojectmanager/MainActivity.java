@@ -1,8 +1,13 @@
 package tn.rnu.enis.myprojectmanager;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +17,12 @@ import android.widget.Toast;
 
 import com.material.widget.ActionSheet;
 
+import java.util.Calendar;
+
 import tn.rnu.enis.myprojectmanager.data.Contract;
 import tn.rnu.enis.myprojectmanager.pagers.TaskHolder;
 import tn.rnu.enis.myprojectmanager.project.ProjectsFragment;
+import tn.rnu.enis.myprojectmanager.services.Notify;
 import tn.rnu.enis.myprojectmanager.task.DefaultTasksFragment;
 import tn.rnu.enis.myprojectmanager.task.TasksFragment;
 
@@ -58,6 +66,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (id == R.id.action_Delete_all_Project) {
             getContentResolver().delete(Contract.Project.CONTENT_URI, null, null);
             Toast.makeText(this, getString(R.string.all_projects_deleted), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.action_setting) {
+            Intent i = new Intent(this,Setting.class);
+            startActivity(i);
             return true;
         }
 

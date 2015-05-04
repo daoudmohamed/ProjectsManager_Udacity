@@ -15,21 +15,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Task Name" />
+            android:hint="@string/task_name" />
 
         <com.material.widget.FloatingEditText
             android:id="@+id/task_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Task Description" />
+            android:hint="@string/task_decription" />
 
         <com.material.widget.Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            android:text="with deadline"
+            android:text="@string/with_deadline"
             android:id="@+id/switch1" />
 
         <com.material.widget.PaperButton

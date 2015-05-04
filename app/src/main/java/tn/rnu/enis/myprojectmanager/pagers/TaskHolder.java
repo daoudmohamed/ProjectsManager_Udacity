@@ -18,7 +18,7 @@ import tn.rnu.enis.myprojectmanager.data.Contract;
  */
 public class TaskHolder extends Fragment {
 
-    private String project_id ;
+    private String mProject_Id;
 
     @Nullable
     @Override
@@ -26,10 +26,10 @@ public class TaskHolder extends Fragment {
 
         View v = inflater.inflate(R.layout.taskswithcategories,container,false);
 
-        project_id = getArguments().getString(Contract.REF);
+        mProject_Id = getArguments().getString(Contract.REF);
 
         ViewPager viewPager = (ViewPager) v.findViewById(R.id.pager);
-        TaskPager adapter = new TaskPager(getActivity().getSupportFragmentManager(),project_id);
+        TaskPager adapter = new TaskPager(getActivity().getSupportFragmentManager(), mProject_Id);
         viewPager.setAdapter(adapter);
 
         TabIndicator indicator = (TabIndicator) v.findViewById(R.id.indicator);

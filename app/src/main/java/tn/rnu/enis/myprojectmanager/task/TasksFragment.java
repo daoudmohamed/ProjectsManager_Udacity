@@ -116,14 +116,22 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String sortOrder = Contract.Project._ID + " DESC";
         String[] argm;
-        if (status == null)
+        String select;
+        if (status == null) {
             argm = new String[]{project_id};
-        else argm = new String[]{project_id, status};
+            select = Contract.Task.TASK_PROJECT + "= ?";
+        } else if (project_id != null) {
+            argm = new String[]{project_id, status};
+            select = Contract.Task.TASK_PROJECT + "= ?"+" AND " + Contract.Task.TASK_STATUS + "= ?" ;
+        } else {
+            argm = new String[]{status};
+            select = Contract.Task.TASK_STATUS + "= ?" ;
+        }
 
         return new CursorLoader(getActivity(),
                 Contract.Task.CONTENT_URI,
                 TASK_COLUMNS,
-                Contract.Task.TASK_PROJECT + "= ?" + ((status != null) ? (" AND " + Contract.Task.TASK_STATUS + "= ?") : ("")),
+                select,
                 argm,
                 sortOrder);
     }

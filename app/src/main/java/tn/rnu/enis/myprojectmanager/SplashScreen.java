@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
  */
 public class SplashScreen extends AppCompatActivity {
 
-    AppCompatActivity activity = this ;
+    private AppCompatActivity mActivity = this ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,9 +23,9 @@ public class SplashScreen extends AppCompatActivity {
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(activity,MainActivity.class);
+                Intent i = new Intent(mActivity,MainActivity.class);
                 startActivity(i);
-                activity.finish();
+                mActivity.finish();
             }
         },3000);
 

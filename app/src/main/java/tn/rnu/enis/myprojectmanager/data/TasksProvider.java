@@ -14,7 +14,7 @@ import android.util.Log;
  */
 public class TasksProvider extends ContentProvider {
 
-    private TasksDb TaskDb;
+    private TasksDb mTaskDb;
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
@@ -35,15 +35,13 @@ public class TasksProvider extends ContentProvider {
         matcher.addURI(authority, Contract.PATH_TASKS, TASK);
         matcher.addURI(authority, Contract.PATH_TASKS + "/#", TASK_WITH_ID);
 
-
-
         return matcher;
     }
 
     @Override
     public boolean onCreate() {
-        TaskDb = new TasksDb(getContext());
-        return (TaskDb!=null);
+        mTaskDb = new TasksDb(getContext());
+        return (mTaskDb !=null);
     }
 
     @Override
@@ -53,7 +51,7 @@ public class TasksProvider extends ContentProvider {
 
         switch (sUriMatcher.match(uri)) {
             case PROJECT: {
-                retCursor = TaskDb.getReadableDatabase().query(
+                retCursor = mTaskDb.getReadableDatabase().query(
                         Contract.Project.TABLE_NAME,
                         projection,
                         selection,
@@ -65,7 +63,7 @@ public class TasksProvider extends ContentProvider {
                 break;
             }
             case TASK: {
-                retCursor = TaskDb.getReadableDatabase().query(
+                retCursor = mTaskDb.getReadableDatabase().query(
                         Contract.Task.TABLE_NAME,
                         projection,
                         selection,
@@ -123,7 +121,7 @@ public class TasksProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        final SQLiteDatabase db = TaskDb.getWritableDatabase();
+        final SQLiteDatabase db = mTaskDb.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         Uri returnUri;
 
@@ -154,7 +152,7 @@ public class TasksProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String projection, String[] args) {
-        final SQLiteDatabase db = TaskDb.getWritableDatabase();
+        final SQLiteDatabase db = mTaskDb.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         int rowsDeleted = 0 ;
         if ( null == projection ) projection = "1";
@@ -176,7 +174,7 @@ public class TasksProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String projection, String[] args) {
-        final SQLiteDatabase db = TaskDb.getWritableDatabase();
+        final SQLiteDatabase db = mTaskDb.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         int rowsUpdated;
 
@@ -229,7 +227,7 @@ public class TasksProvider extends ContentProvider {
         selection = sProjectById;
         selectionArgs = new String[]{id};
 
-        return sGetTaskByProjectId.query(TaskDb.getReadableDatabase(),
+        return sGetTaskByProjectId.query(mTaskDb.getReadableDatabase(),
                 projection,
                 selection,
                 selectionArgs,
@@ -240,11 +238,11 @@ public class TasksProvider extends ContentProvider {
     }
 
     private Cursor getTaskById(Uri uri, String[] projection, String sortOrder) {
-        return TaskDb.getWritableDatabase().query(Contract.Task.TABLE_NAME,projection,Contract.Task._ID+"= ?",new String[]{Contract.getIDFromUri(uri)},null,null,sortOrder);
+        return mTaskDb.getWritableDatabase().query(Contract.Task.TABLE_NAME,projection,Contract.Task._ID+"= ?",new String[]{Contract.getIDFromUri(uri)},null,null,sortOrder);
 
     }
 
     private Cursor getProjectById(Uri uri, String[] projection, String sortOrder) {
-        return TaskDb.getWritableDatabase().query(Contract.Project.TABLE_NAME,projection,Contract.Project._ID+"= ?",new String[]{Contract.getIDFromUri(uri)},null,null,sortOrder);
+        return mTaskDb.getWritableDatabase().query(Contract.Project.TABLE_NAME,projection,Contract.Project._ID+"= ?",new String[]{Contract.getIDFromUri(uri)},null,null,sortOrder);
     }
 }

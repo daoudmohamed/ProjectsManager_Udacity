@@ -9,11 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.material.widget.TabIndicator;
 
-import tn.rnu.enis.myprojectmanager.R;
 import tn.rnu.enis.myprojectmanager.data.Contract;
 import tn.rnu.enis.myprojectmanager.task.TasksFragment;
 
@@ -24,24 +22,22 @@ public class TaskPager extends FragmentPagerAdapter implements TabIndicator.TabT
 
     private int mCount = CONTENT.length;
 
-    private String project_id;
+    private String mProject_Id;
 
     public TaskPager(FragmentManager fragmentManager, String project_id) {
         super(fragmentManager);
-        this.project_id = project_id;
+        this.mProject_Id = project_id;
     }
 
     public void setProject_id(String p){
-        project_id = p ;
+        mProject_Id = p ;
     }
 
     @Override
     public Fragment getItem(int position) {
 
-        Log.i("jjjj", "iiiiiiiii");
-
         Bundle bundle = new Bundle();
-        bundle.putString(Contract.REF, project_id);
+        bundle.putString(Contract.REF, mProject_Id);
         TasksFragment fragInfo = new TasksFragment();
 
         if (position == 0) {

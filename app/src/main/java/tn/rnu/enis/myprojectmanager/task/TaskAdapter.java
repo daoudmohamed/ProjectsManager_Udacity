@@ -14,6 +14,7 @@ import tn.rnu.enis.myprojectmanager.R;
  * Created by Mohamed on 28/04/2015.
  */
 public class TaskAdapter extends CursorAdapter {
+
     public TaskAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }

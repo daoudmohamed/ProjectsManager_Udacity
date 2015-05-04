@@ -52,12 +52,18 @@
             android:name=".task.UpdateTask"
             android:theme="@style/AppTheme"/>
 
+        <activity
+            android:name=".Setting"
+            android:theme="@style/AppTheme"/>
 
         <provider
             android:name=".data.TasksProvider"
             android:authorities="tn.rnu.enis.myprojectmanager.provider"
             android:exported="false"
             android:syncable="true" />
+
+        <service android:name=".services.Notify" />
+
     </application>
 
 </manifest>

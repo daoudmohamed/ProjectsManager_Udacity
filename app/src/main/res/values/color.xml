@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <color name="grey">#cccccc</color>
-        <color name="project_light_blue">#80DEEA</color>
-        <color name="project_blue">#00BCD4</color>
-        <color name="project_dark_blue">#0097A7</color>
+        <color name="background_color">#cccccc</color>
+        <color name="project_light_color">#80DEEA</color>
+        <color name="project_action_bar_color">#00BCD4</color>
+        <color name="project_dark_color">#0097A7</color>
 </resources>

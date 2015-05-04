@@ -18,6 +18,14 @@
     <string name="no_project">No Project Found</string>
     <string name="edit_task">Edit Task</string>
     <string name="projects_manager">PROJECTS MANAGER</string>
+    <string name="with_deadline">with deadline</string>
+    <string name="task_decription">Task Description</string>
+    <string name="task_name">Task Name</string>
+    <string name="project_name">Project Name</string>
+    <string name="project_description">Project Description</string>
+    <string name="action_setting">Setting</string>
+    <string name="Task_Notification">Task Notification</string>
+    <string name="Task_Notification_every_day">Activate notifacation reminder every day</string>
     <string-array name="status">
         <item>waiting</item>
         <item>doing</item>
