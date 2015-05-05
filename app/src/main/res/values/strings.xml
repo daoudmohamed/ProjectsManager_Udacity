@@ -23,9 +23,6 @@
     <string name="task_name">Task Name</string>
     <string name="project_name">Project Name</string>
     <string name="project_description">Project Description</string>
-    <string name="action_setting">Setting</string>
-    <string name="Task_Notification">Task Notification</string>
-    <string name="Task_Notification_every_day">Activate notifacation reminder every day</string>
     <string-array name="status">
         <item>waiting</item>
         <item>doing</item>

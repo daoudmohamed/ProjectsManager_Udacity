@@ -2,11 +2,13 @@ package tn.rnu.enis.myprojectmanager.task;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.material.widget.FloatingEditText;
 import com.material.widget.PaperButton;
@@ -75,15 +77,25 @@ public class UpdateTask extends AppCompatActivity {
                 values.put(Contract.Task.TASK_DESCRIPTION, mTask_detail.getText().toString());
                 values.put(Contract.Task.TASK_DATE, mTask_date.getText().toString());
                 values.put(Contract.Task.TASK_STATUS, mSpinner.getSelectedItem().toString());
-
-                int i = getContentResolver().update(Contract.Task.CONTENT_URI, values, Contract.Task._ID + "= ?", new String[]{mId});
-
-                mActivity.finish();
-
+                new update().execute(values);
             }
         });
 
+    }
 
+    class update extends AsyncTask<ContentValues,Void,Void>{
 
+        @Override
+        protected Void doInBackground(ContentValues... contentValueses) {
+            int i = getContentResolver().update(Contract.Task.CONTENT_URI, contentValueses[0], Contract.Task._ID + "= ?", new String[]{mId});
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(mActivity,"Task Updated",Toast.LENGTH_SHORT).show();
+            mActivity.finish();
+        }
     }
 }
