@@ -83,19 +83,21 @@ public class UpdateTask extends AppCompatActivity {
 
     }
 
-    class update extends AsyncTask<ContentValues,Void,Void>{
+    class update extends AsyncTask<ContentValues,Void,Integer>{
 
         @Override
-        protected Void doInBackground(ContentValues... contentValueses) {
-            int i = getContentResolver().update(Contract.Task.CONTENT_URI, contentValueses[0], Contract.Task._ID + "= ?", new String[]{mId});
-            return null;
+        protected Integer doInBackground(ContentValues... contentValueses) {
+            return getContentResolver().update(Contract.Task.CONTENT_URI, contentValueses[0], Contract.Task._ID + "= ?", new String[]{mId});
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Toast.makeText(mActivity,"Task Updated",Toast.LENGTH_SHORT).show();
-            mActivity.finish();
+        protected void onPostExecute(Integer num) {
+            super.onPostExecute(num);
+            if(num>0) {
+                Toast.makeText(mActivity,"Task Updated",Toast.LENGTH_SHORT).show();
+                mActivity.finish();
+            }
+                else Toast.makeText(mActivity,"Error while Updating",Toast.LENGTH_SHORT).show();
         }
     }
 }
