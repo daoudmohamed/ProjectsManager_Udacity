@@ -14,10 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/projects_manager"
-            android:textSize="35dp" />
-
-
-
+            android:textSize="35sp" />
 
     <com.material.widget.CircularProgress
         android:layout_width="wrap_content"
