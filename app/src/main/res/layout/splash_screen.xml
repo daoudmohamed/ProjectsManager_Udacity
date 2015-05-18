@@ -4,22 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/project_light_color">
 
-
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/projects_manager"
-            android:textSize="35sp" />
-
-    <com.material.widget.CircularProgress
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/projects_manager"
+        android:textSize="15sp"
+        android:textColor="#313131"
+        android:layout_marginTop="40dp" />
+
+    <com.material.widget.CircularProgress
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="15dp"
         widget:circular_progress_size="Normal" />
 
 </LinearLayout>

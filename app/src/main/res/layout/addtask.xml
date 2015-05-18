@@ -25,12 +25,12 @@
             android:hint="@string/task_decription" />
 
         <com.material.widget.Switch
+            android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            android:text="@string/with_deadline"
-            android:id="@+id/switch1" />
+            android:layout_marginLeft="10dp"
+            android:text="@string/with_deadline" />
 
         <com.material.widget.PaperButton
             android:id="@+id/submit"

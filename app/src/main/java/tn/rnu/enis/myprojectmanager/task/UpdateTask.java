@@ -96,6 +96,7 @@ public class UpdateTask extends AppCompatActivity {
             if(num>0) {
                 Toast.makeText(mActivity,"Task Updated",Toast.LENGTH_SHORT).show();
                 mActivity.finish();
+                overridePendingTransition(R.anim.open_main, R.anim.close_next);
             }
                 else Toast.makeText(mActivity,"Error while Updating",Toast.LENGTH_SHORT).show();
         }

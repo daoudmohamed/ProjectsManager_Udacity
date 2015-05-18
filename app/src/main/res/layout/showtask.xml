@@ -68,7 +68,7 @@
             android:src="@drawable/ic_action_edit"
             fab:fab_colorNormal="#F44336"
             fab:fab_colorPressed="#E53935"
-            fab:fab_colorRipple="#FFEBEE"></com.melnykov.fab.FloatingActionButton>
+            fab:fab_colorRipple="#FFEBEE"/>
 
 
     </RelativeLayout>

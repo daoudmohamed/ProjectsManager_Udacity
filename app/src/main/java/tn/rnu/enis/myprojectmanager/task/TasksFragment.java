@@ -164,4 +164,6 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -73,11 +73,13 @@ public class ProjectsFragment extends Fragment implements LoaderManager.LoaderCa
         flot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(),AddProject.class);
+                Intent i = new Intent(getActivity(), AddProject.class);
                 startActivity(i);
+
             }
         });
         super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override

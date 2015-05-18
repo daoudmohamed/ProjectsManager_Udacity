@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/list_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp" />
 
     <TextView
         android:id="@+id/notfound"
@@ -25,11 +26,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_gravity="right|bottom"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/ic_action_new"
-        fab:fab_colorNormal="#673AB7"
-        fab:fab_colorPressed="#673AB7"
-        fab:fab_colorRipple="#673AB7" />
+        android:src="@drawable/ic_action_edit"
+        fab:fab_colorNormal="#F44336"
+        fab:fab_colorPressed="#E53935"
+        fab:fab_colorRipple="#FFEBEE"/>
+
 </RelativeLayout>

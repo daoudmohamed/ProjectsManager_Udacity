@@ -65,10 +65,10 @@ public class Contract {
     }
 
     public static class Status {
-        public static final String WAITING = "waiting";
-        public static final String DOING = "doing";
-        public static final String BLOCKED = "blocked";
-        public static final String DONE = "done";
+        public static final String WAITING = "Awaiting";
+        public static final String DOING = "In progress";
+        public static final String BLOCKED = "Blocked";
+        public static final String DONE = "Done";
     }
 
     public static String REF = "REF";

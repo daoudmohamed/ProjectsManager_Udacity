@@ -74,10 +74,19 @@ public class ShowTask extends AppCompatActivity {
         if (id == R.id.action_Delete) {
             getContentResolver().delete(Contract.Task.CONTENT_URI,Contract.Task._ID+"= ?",new String[]{this.mId});
             this.finish();
+            overridePendingTransition(R.anim.open_main, R.anim.close_next);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        overridePendingTransition(R.anim.open_main, R.anim.close_next);
+    }
+
 
 }

@@ -87,6 +87,7 @@ public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDat
                 Uri a = getContentResolver().insert(Contract.Task.CONTENT_URI, vals);
                 Toast.makeText(getApplicationContext(), getString(R.string.task_add), Toast.LENGTH_SHORT).show();
                 mActivity.finish();
+                overridePendingTransition(R.anim.open_main, R.anim.close_next);
             }
         });
     }
@@ -95,4 +96,12 @@ public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDat
     public void onDateSet(DatePickerDialog datePickerDialog, int day, int month, int year) {
         mDate_Text =  day + "/" +  month+1 + "/" + year ;
     }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        overridePendingTransition (R.anim.open_main, R.anim.close_next);
+    }
+
 }
