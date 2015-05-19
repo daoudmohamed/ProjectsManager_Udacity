@@ -22,13 +22,13 @@ import tn.rnu.enis.myprojectmanager.data.Contract;
 /**
  * Created by Mohamed on 28/04/2015.
  */
-public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private PaperButton mSubmit;
     private FloatingEditText mName_Text;
     private FloatingEditText mDetail;
     private String mDate_Text;
-    private AppCompatActivity mActivity = this ;
+    private AppCompatActivity mActivity = this;
     private String mId_Project;
 
     private Switch mDate;
@@ -37,8 +37,7 @@ public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDat
     private final DatePickerDialog DATE_PICKER_DIALOG = DatePickerDialog.newInstance(this, CALENDAR.get(Calendar.YEAR), CALENDAR.get(Calendar.MONTH), CALENDAR.get(Calendar.DAY_OF_MONTH), false);
 
 
-
-    boolean with_date ;
+    boolean with_date;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDat
 
         mId_Project = getIntent().getStringExtra(Contract.REF);
 
-        mName_Text = ((FloatingEditText)findViewById(R.id.task_name));
+        mName_Text = ((FloatingEditText) findViewById(R.id.task_name));
         mDetail = (FloatingEditText) findViewById(R.id.task_detail);
 
         mSubmit = (PaperButton) findViewById(R.id.submit);
@@ -94,14 +93,14 @@ public class AddTask extends AppCompatActivity implements DatePickerDialog.OnDat
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int day, int month, int year) {
-        mDate_Text =  day + "/" +  month+1 + "/" + year ;
+        mDate_Text = day + "/" + (month + 1) + "/" + year;
     }
 
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
         super.onBackPressed();
-        overridePendingTransition (R.anim.open_main, R.anim.close_next);
+        overridePendingTransition(R.anim.open_main, R.anim.close_next);
     }
 
 }

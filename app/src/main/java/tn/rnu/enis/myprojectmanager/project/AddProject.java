@@ -89,7 +89,7 @@ public class AddProject extends AppCompatActivity implements DatePickerDialog.On
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        date_text = day + "/" + month + 1 + "/" + year;
+        date_text = day + "/" + (month + 1) + "/" + year;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class AddProject extends AppCompatActivity implements DatePickerDialog.On
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 finish();
-                overridePendingTransition (R.anim.open_main, R.anim.close_next);
+                overridePendingTransition(R.anim.open_main, R.anim.close_next);
                 return true;
         }
         return super.onOptionsItemSelected(item);
