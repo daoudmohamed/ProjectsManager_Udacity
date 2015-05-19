@@ -23,6 +23,7 @@
     <string name="task_name">Task Name</string>
     <string name="project_name">Project Name</string>
     <string name="project_description">Project Description</string>
+    <string name="delete_task">Delete task</string>
     <string-array name="status">
         <item>Awaiting</item>
         <item>In progress</item>

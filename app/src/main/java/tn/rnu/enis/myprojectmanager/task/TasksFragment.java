@@ -24,6 +24,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.security.interfaces.DSAKey;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import tn.rnu.enis.myprojectmanager.project.AddProject;
 import tn.rnu.enis.myprojectmanager.R;
 import tn.rnu.enis.myprojectmanager.data.Contract;
@@ -157,8 +158,31 @@ public class TasksFragment extends Fragment implements LoaderManager.LoaderCallb
         int id = item.getItemId();
 
         if (id == R.id.action_Delete) {
-            getActivity().getContentResolver().delete(Contract.Project.CONTENT_URI, Contract.Task._ID + "= ?", new String[]{project_id});
-            getActivity().finish();
+
+
+            final MaterialDialog mMaterialDialog = new MaterialDialog(getActivity());
+            mMaterialDialog.setTitle("Info");
+
+            mMaterialDialog
+                    .setMessage("Do you really want to delete this project ?")
+                    .setPositiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getActivity().getContentResolver().delete(Contract.Project.CONTENT_URI, Contract.Task._ID + "= ?", new String[]{project_id});
+                            getActivity().finish();
+                        }
+                    });
+
+            mMaterialDialog.setNegativeButton("CANCEL", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMaterialDialog.dismiss();
+                }
+            });
+
+            mMaterialDialog.show();
+
+
             return true;
         }
 

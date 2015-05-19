@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import tn.rnu.enis.myprojectmanager.data.Contract;
 import tn.rnu.enis.myprojectmanager.project.ProjectsFragment;
 import tn.rnu.enis.myprojectmanager.task.DefaultTasksFragment;
@@ -57,8 +58,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         if (id == R.id.action_Delete_all_Project) {
-            getContentResolver().delete(Contract.Project.CONTENT_URI, null, null);
-            Toast.makeText(this, getString(R.string.all_projects_deleted), Toast.LENGTH_SHORT).show();
+
+            final MaterialDialog mMaterialDialog = new MaterialDialog(MainActivity.this);
+            mMaterialDialog.setTitle("Info");
+
+            mMaterialDialog
+                    .setMessage("Do you really want to remove all your projects ?")
+                    .setPositiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getContentResolver().delete(Contract.Project.CONTENT_URI, null, null);
+                            Toast.makeText(getApplicationContext(), getString(R.string.all_projects_deleted), Toast.LENGTH_SHORT).show();
+                            mMaterialDialog.dismiss();
+                        }
+                    });
+
+            mMaterialDialog.setNegativeButton("CANCEL", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMaterialDialog.dismiss();
+                }
+            });
+
+            mMaterialDialog.show();
+
             return true;
         }
 

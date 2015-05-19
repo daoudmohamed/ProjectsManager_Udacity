@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import tn.rnu.enis.myprojectmanager.R;
 import tn.rnu.enis.myprojectmanager.data.Contract;
 
@@ -63,7 +65,7 @@ public class ShowTask extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.delmenu, menu);
+        getMenuInflater().inflate(R.menu.deltask, menu);
         return true;
     }
 
@@ -71,10 +73,33 @@ public class ShowTask extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_Delete) {
-            getContentResolver().delete(Contract.Task.CONTENT_URI,Contract.Task._ID+"= ?",new String[]{this.mId});
-            this.finish();
-            overridePendingTransition(R.anim.open_main, R.anim.close_next);
+        if (id == R.id.action_Delete_Task) {
+
+            final MaterialDialog mMaterialDialog = new MaterialDialog(ShowTask.this);
+            mMaterialDialog.setTitle("Info");
+
+            mMaterialDialog
+                    .setMessage("Do you really want to remove this task ?")
+                    .setPositiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getContentResolver().delete(Contract.Task.CONTENT_URI, Contract.Task._ID + "= ?", new String[]{mId});
+                            finish();
+                            overridePendingTransition(R.anim.open_main, R.anim.close_next);
+                            mMaterialDialog.dismiss();
+                        }
+                    });
+
+            mMaterialDialog.setNegativeButton("CANCEL", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMaterialDialog.dismiss();
+                }
+            });
+
+            mMaterialDialog.show();
+
+
             return true;
         }
 
