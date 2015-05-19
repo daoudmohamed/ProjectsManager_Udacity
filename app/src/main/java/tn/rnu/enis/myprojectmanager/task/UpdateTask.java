@@ -7,31 +7,49 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.material.widget.FloatingEditText;
 import com.material.widget.PaperButton;
+import com.material.widget.Switch;
+
+import java.util.Calendar;
 
 import tn.rnu.enis.myprojectmanager.R;
 import tn.rnu.enis.myprojectmanager.data.Contract;
+import tn.rnu.enis.myprojectmanager.utils.MyDate;
 
 /**
  * Created by Mohamed on 29/04/2015.
  */
-public class UpdateTask extends AppCompatActivity {
+public class UpdateTask extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private FloatingEditText mTask_name, mTask_detail, mTask_date;
+    private FloatingEditText mTask_name, mTask_detail;
     private Spinner mSpinner;
     private PaperButton mUpdate;
+    private String mDate_Text;
+    private boolean with_date ;
 
     private String mId;
     private AppCompatActivity mActivity = this ;
+
+    private Switch mDate;
+
+    private DatePickerDialog DATE_PICKER_DIALOG ;
+
+    private static final Calendar CALENDAR = Calendar.getInstance();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.udpastetask);
+
+        mDate = (Switch) findViewById(R.id.switch1);
+
 
         mId = getIntent().getStringExtra(Contract.REF);
 
@@ -39,7 +57,7 @@ public class UpdateTask extends AppCompatActivity {
 
         mTask_name = (FloatingEditText) findViewById(R.id.task_name);
         mTask_detail = (FloatingEditText) findViewById(R.id.task_detail);
-        mTask_date = (FloatingEditText) findViewById(R.id.task_date);
+
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
         mUpdate = (PaperButton) findViewById(R.id.submit);
@@ -50,7 +68,17 @@ public class UpdateTask extends AppCompatActivity {
 
         mTask_name.setText(c.getString(TasksFragment.COL_TASK_NAME));
         mTask_detail.setText(c.getString(TasksFragment.COL_TASK_DESCRIPTION));
-        mTask_date.setText(c.getString(TasksFragment.COL_TASK_DATE));
+        mDate.setChecked(((c.getString(TasksFragment.COL_TASK_DATE) == null) || c.getString(TasksFragment.COL_TASK_DATE).equals("") ? (false) : (true)));
+        if(mDate.isChecked()) {
+            MyDate date = new MyDate(c.getString(TasksFragment.COL_TASK_DATE));
+            DATE_PICKER_DIALOG = DatePickerDialog.newInstance(this,date.getYear(), date.getMouth(), date.getDay(), false);
+        }else{
+            DATE_PICKER_DIALOG = DatePickerDialog.newInstance(this, CALENDAR.get(Calendar.YEAR), CALENDAR.get(Calendar.MONTH), CALENDAR.get(Calendar.DAY_OF_MONTH), false);
+
+        }
+
+
+
 
         switch (c.getString(TasksFragment.COL_TASK_STATUS)){
             case Contract.Status.WAITING :
@@ -75,12 +103,27 @@ public class UpdateTask extends AppCompatActivity {
 
                 values.put(Contract.Task.TASK_NAME, mTask_name.getText().toString());
                 values.put(Contract.Task.TASK_DESCRIPTION, mTask_detail.getText().toString());
-                values.put(Contract.Task.TASK_DATE, mTask_date.getText().toString());
+                values.put(Contract.Task.TASK_DATE, (with_date)?(mDate_Text):(""));
                 values.put(Contract.Task.TASK_STATUS, mSpinner.getSelectedItem().toString());
                 new update().execute(values);
             }
         });
 
+        mDate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                with_date = b;
+                if (b) {
+                    DATE_PICKER_DIALOG.show(getSupportFragmentManager(), "lll");
+                }
+            }
+        });
+        if(mDate.isChecked()) DATE_PICKER_DIALOG.show(getSupportFragmentManager(), "lll") ;
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int day, int month, int year) {
+            mDate_Text = day + "/" + (month + 1) + "/" + year;
     }
 
     class update extends AsyncTask<ContentValues,Void,Integer>{

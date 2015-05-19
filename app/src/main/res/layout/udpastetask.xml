@@ -23,13 +23,13 @@
             android:layout_marginTop="10dp"
             android:hint="Task Description" />
 
-        <com.material.widget.FloatingEditText
-            android:id="@+id/task_date"
-            android:layout_width="match_parent"
+        <com.material.widget.Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Deadline"
-            android:inputType="date" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="@string/with_deadline" />
 
 
         <Spinner

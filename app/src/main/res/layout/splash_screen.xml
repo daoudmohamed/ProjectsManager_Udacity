@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/project_light_color">
+    android:background="@color/project_action_bar_color">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/projects_manager"
-        android:textSize="15sp"
-        android:textColor="#313131"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
         android:layout_marginTop="40dp" />
 
     <com.material.widget.CircularProgress

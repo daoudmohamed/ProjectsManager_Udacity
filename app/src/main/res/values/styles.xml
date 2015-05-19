@@ -15,4 +15,9 @@
         <item name="logo">@mipmap/ic_launcher</item>
     </style>
 
+    <style name="splash_theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/project_action_bar_color</item>
+        <item name="colorPrimaryDark">@color/project_dark_color</item>
+    </style>
+
 </resources>
